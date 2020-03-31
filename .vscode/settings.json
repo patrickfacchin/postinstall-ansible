@@ -1,0 +1,12 @@
+{
+	/**************************************************************************
+        *[BUGFIX] invisible underscore in integrated-term*/
+    //"editor.fontFamily": "'Ubuntu Mono', monospace",
+    "window.zoomLevel": -1,
+	/*************************************************************************/
+	
+	// deixar visivel a pasta git
+	"files.exclude": {
+        "**/.git": true
+	},
+}

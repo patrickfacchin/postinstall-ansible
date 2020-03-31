@@ -1,0 +1,28 @@
+- name: DOCKER > Install required system packages
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: 
+    - apt-transport-https # transitional package for https support
+    - ca-certificates # Common CA certificates
+    - curl # command line tool for transferring data with URL syntax
+    - gnupg-agent # GNU privacy guard - cryptographic agent (dummy transitional package)
+    - software-properties-common # manage the repositories that you install software from (common)
+  
+- name: DOCKER > Add GPG key
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+- name: DOCKER > Add APT repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    filename: docker-ce
+
+- name: DOCKER > Install packages
+  apt:
+    name:
+      - docker-ce # Docker: the open-source application container engine
+      - docker-compose # Punctual, lightweight development environments using Docker
+    update_cache: yes
+
+- name: DOCKER > usermod
+  shell: "{{item}}"
+  with_items:
+     - "usermod -aG docker {{ current_user }}"

@@ -1,0 +1,65 @@
+#########################################################################################
+- name: Remove packages
+  apt: name={{ item }} state=absent
+  loop: 
+    - gmusicbrowser # graphical jukebox for large music collections
+    - gnome-mines # popular minesweeper puzzle game for GNOME
+    - gnome-sudoku # sudoku puzzle game for GNOME
+    - transmission-gtk # lightweight BitTorrent client (GTK+ interface) 
+#########################################################################################
+- name: Install packages
+  apt: name={{ item }} state=present update_cache=yes
+  loop:
+    - apt-transport-https # transitional package for https support 
+    - apache2-utils # utility programs for web servers | AB stress test
+    - axel # downloads rapido | threds 
+    - bmon # portable bandwidth monitor and rate estimator
+    - breeze # Default Plasma theme (meta-package)
+    - ca-certificates # Common CA certificates
+    - clamav # anti-virus utility for Unix # use: clamscan -r <path/file>
+    - code # IDE 
+    - cryptomator # multi-platform client-side encryption of your cloud files 
+    - curl # programa para trasnferir dados para sites
+    - elinks # navegador por linha de comando
+    - ffmpeg # Tools for transcoding, streaming and playing of multimedia files
+    - gdebi # ferramenta para facilitar instalação de arquivos .deb
+    - git # fast, scalable, distributed revision control system
+    - gnupg-agent # GNU privacy guard - cryptographic agent (dummy transitional package)
+    - google-chrome-stable # navegador
+    - gparted # gerenciador de partições
+    - htop # software para visualizar o processamento, ....
+    - nodejs # interpretador de V8 JavaScript
+    - npm # gerenciador de pacotes do Node.js
+    - meld # diff de arquivos
+    - mysql-workbench # MYSQL ferramentas, modelagem, administração,...
+    - nmap # software para scaner de portas
+    - obs-studio # OBS Studio for Ubuntu
+    - php # server-side, HTML-embedded scripting language (default)
+    - php-common # Common files for PHP packages
+    - php-mysql # MySQL module for PHP
+    - php-cli # PHP
+    - php-mbstring # Modulo MBSTRING do PHP
+    - redshift-gtk # filtro de luz azul
+    - speedtest-cli # command line interface for testing internet bandwidth using speedtest.net
+    - software-properties-common # manage the repositories that you install software from (common)
+    - unrar # arquivos .rar
+    - qml-module-qtmultimedia # Qt 5 multimedia QML module
+    - kdenlive # video editor
+    - vlc # player de videos
+    - vim # editor de texto por linha de comando
+    - whois # intelligent WHOIS client
+    - virtualbox # virtualização
+    - tmux # terminal multiplexer
+    - tor # anonymizing overlay network for TCP
+    - vidcutter # the simplest + fastest video cutter & joiner 
+#########################################################################################
+- name: DOCKER > usermod
+  shell: "{{item}}"
+  loop:
+    - (cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php)
+    - ln -sf /tmp/composer.phar /usr/local/bin/composer
+#########################################################################################
+- name: Install packages
+  snap: name={{ item }} state=present
+  loop: 
+    - postman # API Development Environment

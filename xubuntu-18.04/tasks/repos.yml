@@ -1,0 +1,50 @@
+#########################################################################################
+- name: Cryptomator | multi-platform client-side encryption of your cloud files 
+  apt_repository:
+    repo: ppa:sebastian-stenzel/cryptomator
+    state: present
+    filename: cryptomator
+#########################################################################################
+- name: Google Chrome > Add GPG key
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+- name: Google Chrome > Repo
+  apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    state: present
+    filename: google-chrome-stable
+#########################################################################################
+- name: OBS-STUDIO > Repo
+  apt_repository:
+    repo: ppa:obsproject/obs-studio
+    state: present
+    filename: obs-studio
+#########################################################################################
+- name: PHP > Repo
+  apt_repository:
+    repo: ppa:ondrej/php
+    state: present
+    filename: php
+#########################################################################################
+- name: Vidcutter | the simplest + fastest video cutter & joiner 
+  apt_repository:
+    repo: ppa:ozmartian/apps
+    state: present
+    filename: vidcutter
+#########################################################################################
+- name: VSCODE > Add GPG key
+  apt_key: url=https://packages.microsoft.com/keys/microsoft.asc
+
+- name: VSCODE | IDE 
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    state: present
+    filename: vscode
+#########################################################################################
+- name: Kdenlive > Repo
+  apt_repository:
+    repo: ppa:kdenlive/kdenlive-stable
+    state: present
+    filename: kdenlive
+#########################################################################################
+
