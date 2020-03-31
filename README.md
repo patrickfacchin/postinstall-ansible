@@ -11,7 +11,7 @@ apt install -y ansible git
 
 ``` sh
 ansible-pull \
-    --url https://github.com/patrickfacchin/workstation-ansible.git \
+    --url https://github.com/patrickfacchin/postinstall-ansible.git \
     --extra-vars "current_user=<USER> dist=xubuntu-18.04"
 ```
 
