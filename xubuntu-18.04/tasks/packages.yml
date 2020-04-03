@@ -39,6 +39,7 @@
     - php-mysql # MySQL module for PHP
     - php-cli # PHP
     - php-mbstring # Modulo MBSTRING do PHP
+    - pv # Shell pipeline element to meter data passing through
     - redshift-gtk # filtro de luz azul
     - speedtest-cli # command line interface for testing internet bandwidth using speedtest.net
     - software-properties-common # manage the repositories that you install software from (common)
