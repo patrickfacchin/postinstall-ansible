@@ -58,7 +58,7 @@
   shell: "{{item}}"
   loop:
     - (cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php)
-    - ln -sf /tmp/composer.phar /usr/local/bin/composer
+    - mv /tmp/composer.phar /usr/local/bin/composer
 #########################################################################################
 - name: Install packages
   snap: name={{ item }} state=present
