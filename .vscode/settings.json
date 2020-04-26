@@ -7,6 +7,6 @@
 	
 	// deixar visivel a pasta git
 	"files.exclude": {
-        "**/.git": true
+        "**/.git": false
 	},
 }
