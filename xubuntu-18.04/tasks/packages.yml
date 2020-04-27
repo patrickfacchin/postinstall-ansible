@@ -8,7 +8,7 @@
     - transmission-gtk # lightweight BitTorrent client (GTK+ interface) 
 #########################################################################################
 - name: Install packages
-  apt: name={{ item }} state=present update_cache=yes
+  apt: name={{ item }} state=present
   loop:
     - apt-transport-https # transitional package for https support 
     - apache2-utils # utility programs for web servers | AB stress test
