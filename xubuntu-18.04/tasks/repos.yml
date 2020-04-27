@@ -3,6 +3,7 @@
   apt_repository:
     repo: ppa:sebastian-stenzel/cryptomator
     state: present
+    update_cache: no
     filename: cryptomator
 #########################################################################################
 - name: Google Chrome > Add GPG key
@@ -11,24 +12,28 @@
 - name: Google Chrome > Repo
   apt_repository:
     repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    update_cache: no
     state: present
     filename: google-chrome-stable
 #########################################################################################
 - name: OBS-STUDIO > Repo
   apt_repository:
     repo: ppa:obsproject/obs-studio
+    update_cache: no
     state: present
     filename: obs-studio
 #########################################################################################
 - name: PHP > Repo
   apt_repository:
     repo: ppa:ondrej/php
+    update_cache: no
     state: present
     filename: php
 #########################################################################################
 - name: Vidcutter | the simplest + fastest video cutter & joiner 
   apt_repository:
     repo: ppa:ozmartian/apps
+    update_cache: no
     state: present
     filename: vidcutter
 #########################################################################################
@@ -38,13 +43,21 @@
 - name: VSCODE | IDE 
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    update_cache: no
     state: present
     filename: vscode
 #########################################################################################
 - name: Kdenlive > Repo
   apt_repository:
     repo: ppa:kdenlive/kdenlive-stable
+    update_cache: no
     state: present
     filename: kdenlive
+#########################################################################################
+- name: Update cache
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
 #########################################################################################
 
