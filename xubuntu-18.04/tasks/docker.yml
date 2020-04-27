@@ -1,5 +1,5 @@
 - name: DOCKER > Install required system packages
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=present
   loop: 
     - apt-transport-https # transitional package for https support
     - ca-certificates # Common CA certificates

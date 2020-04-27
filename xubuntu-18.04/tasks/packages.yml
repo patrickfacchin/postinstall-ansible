@@ -58,6 +58,8 @@
 #########################################################################################
 - name: Install composer
   shell: "{{item}}"
+  async: 45
+  poll: 5
   loop:
     - (cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php)
     - mv /tmp/composer.phar /usr/local/bin/composer
