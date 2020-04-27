@@ -1,6 +1,7 @@
 ---
 - name: "Postinstall with Ansible and Git"
   hosts: localhost
+  strategy: mitogen_linear
   connection: local
   
   pre_tasks:
