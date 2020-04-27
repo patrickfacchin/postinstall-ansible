@@ -68,8 +68,7 @@
     chdir: "{{dist}}/files/"
   loop:
     - tar xvf NetExtender.x86_64.tgz
-    - cd netExtenderClient/
-    - ./install
+    - cd netExtenderClient/ && ./install
 #########################################################################################
 - name: Install snap packages
   snap: name={{ item }} state=present
