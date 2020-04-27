@@ -1,5 +1,5 @@
 - name: VCAM > Install required system packages
-  apt: name={{ item }} state=latest update_cache=yes
+  apt: name={{ item }} state=present
   loop: 
     - v4l2loopback-dkms # Source for the v4l2loopback driver (DKMS)
     - qtbase5-dev # Qt 5 base development files
