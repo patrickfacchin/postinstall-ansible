@@ -56,13 +56,22 @@
     - tor # anonymizing overlay network for TCP
     - vidcutter # the simplest + fastest video cutter & joiner 
 #########################################################################################
-- name: DOCKER > usermod
+- name: Install composer
   shell: "{{item}}"
   loop:
     - (cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php)
     - mv /tmp/composer.phar /usr/local/bin/composer
 #########################################################################################
-- name: Install packages
+- name: Install NetExtender
+  shell: "{{item}}"
+  args:
+    chdir: "{{dist}}/files/"
+  loop:
+    - tar xvf NetExtender.x86_64.tgz
+    - cd netExtenderClient/
+    - ./install
+#########################################################################################
+- name: Install snap packages
   snap: name={{ item }} state=present
   loop: 
     - postman # API Development Environment
