@@ -20,6 +20,7 @@
     - code # IDE 
     - cryptomator # multi-platform client-side encryption of your cloud files 
     - curl # programa para trasnferir dados para sites
+    - default-jre # Standard Java or Java compatible Runtime
     - elinks # navegador por linha de comando
     - ffmpeg # Tools for transcoding, streaming and playing of multimedia files
     - gdebi # ferramenta para facilitar instalação de arquivos .deb
