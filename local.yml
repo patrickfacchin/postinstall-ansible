@@ -4,12 +4,9 @@
   connection: local
   
   pre_tasks:
-    - name: Install prerequisites
-      apt:
-        update_cache: yes
+    - include: "{{dist}}/tasks/repos.yml"
         
   tasks:
-    - include: "{{dist}}/tasks/repos.yml"
     - include: "{{dist}}/tasks/packages.yml"
     - include: "{{dist}}/tasks/docker.yml"
     - include: "{{dist}}/tasks/virtualcam.yml"
