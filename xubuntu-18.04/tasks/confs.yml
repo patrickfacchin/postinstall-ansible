@@ -13,6 +13,7 @@
   become_user: "{{current_user}}"
   loop:
     # VSCODE
+    - code --install-extension alexkrechik.cucumberautocomplete
     - code --install-extension vscoss.vscode-ansible
     - code --install-extension ms-azuretools.vscode-docker
     - code --install-extension editorconfig.editorconfig
