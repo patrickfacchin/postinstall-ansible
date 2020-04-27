@@ -49,6 +49,11 @@
   become_user: "{{current_user}}"
   copy: src={{dist}}/files/settings.json dest=/home/{{current_user}}/.config/Code/User/settings.json
 #########################################################################################
+- name: Geral
+  shell: "{{item}}"
+  with_items:
+     - "rm /etc/apt/sources.list.d/google-chrome-stable.list"
+#########################################################################################
 # - name: Restarted service lightdm
 #   service:
 #     name: lightdm
