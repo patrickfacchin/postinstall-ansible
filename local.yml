@@ -5,14 +5,17 @@
   
   pre_tasks:
     - include: "{{dist}}/tasks/repos.yml"
+    - name: Update cache
+      apt:
+        update_cache: yes
         
   tasks:
     - include: "{{dist}}/tasks/packages.yml"
     - include: "{{dist}}/tasks/docker.yml"
     - include: "{{dist}}/tasks/virtualcam.yml"
-    - include: "{{dist}}/tasks/confs.yml"
-
+  
   post_tasks:
+    - include: "{{dist}}/tasks/confs.yml"
     - name: Cleanup
       apt:
         autoremove: yes
