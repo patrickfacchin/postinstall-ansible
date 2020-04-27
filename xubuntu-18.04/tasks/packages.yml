@@ -34,6 +34,7 @@
     - mysql-workbench # MYSQL ferramentas, modelagem, administração,...
     - nmap # software para scaner de portas
     - obs-studio # OBS Studio for Ubuntu
+    - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
     - php # server-side, HTML-embedded scripting language (default)
     - php-common # Common files for PHP packages
     - php-mysql # MySQL module for PHP
