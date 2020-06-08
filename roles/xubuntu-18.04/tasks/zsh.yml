@@ -3,12 +3,13 @@
   loop: 
     - zsh # shell with lots of features
 
-#########################################################################################    
-- name: Oh My Zsh > SETUP
-  shell: "{{item}}"
-  become: true
-  become_user: "{{current_user}}"
-  with_items:
-    - sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+#########################################################################################  
+# TODO  
+# - name: Oh My Zsh > SETUP
+#   shell: "{{item}}"
+#   become: true
+#   become_user: "{{current_user}}"
+#   with_items:
+#     - sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 #########################################################################################
