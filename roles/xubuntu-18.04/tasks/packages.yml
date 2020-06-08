@@ -25,6 +25,7 @@
     - ffmpeg # Tools for transcoding, streaming and playing of multimedia files
     - gdebi # ferramenta para facilitar instalação de arquivos .deb
     - git # fast, scalable, distributed revision control system
+    - gnome-disk-utility # manage and configure disk drives and media
     - gnupg-agent # GNU privacy guard - cryptographic agent (dummy transitional package)
     - google-chrome-stable # navegador
     - gparted # gerenciador de partições
