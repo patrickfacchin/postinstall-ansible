@@ -1,53 +1,53 @@
 #########################################################################################
-- name: Cryptomator | multi-platform client-side encryption of your cloud files 
+- name: Repository > Cryptomator | multi-platform client-side encryption of your cloud files 
   apt_repository:
     repo: ppa:sebastian-stenzel/cryptomator
     state: present
     update_cache: no
     filename: cryptomator
 #########################################################################################
-- name: Google Chrome > Add GPG key
+- name: APT_KEY > Google Chrome
   apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
 
-- name: Google Chrome > Repo
+- name: Repository > Google Chrome
   apt_repository:
     repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
     update_cache: no
     state: present
     filename: google-chrome-stable
 #########################################################################################
-- name: OBS-STUDIO > Repo
+- name: Repository > OBS-STUDIO
   apt_repository:
     repo: ppa:obsproject/obs-studio
     update_cache: no
     state: present
     filename: obs-studio
 #########################################################################################
-- name: PHP > Repo
+- name: Repository > PHP
   apt_repository:
     repo: ppa:ondrej/php
     update_cache: no
     state: present
     filename: php
 #########################################################################################
-- name: Vidcutter | the simplest + fastest video cutter & joiner 
+- name: Repository > Vidcutter | the simplest + fastest video cutter & joiner 
   apt_repository:
     repo: ppa:ozmartian/apps
     update_cache: no
     state: present
     filename: vidcutter
 #########################################################################################
-- name: VSCODE > Add GPG key
+- name: APT_KEY > VSCODE
   apt_key: url=https://packages.microsoft.com/keys/microsoft.asc
 
-- name: VSCODE | IDE 
+- name: Repository > VSCODE | IDE 
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
     update_cache: no
     state: present
     filename: vscode
 #########################################################################################
-- name: Kdenlive > Repo
+- name: Repository > Kdenlive
   apt_repository:
     repo: ppa:kdenlive/kdenlive-stable
     update_cache: no

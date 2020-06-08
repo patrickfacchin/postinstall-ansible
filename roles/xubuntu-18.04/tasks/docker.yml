@@ -1,3 +1,4 @@
+---
 - name: DOCKER > Install required system packages
   apt: name={{ item }} state=present
   loop: 
@@ -15,14 +16,17 @@
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     filename: docker-ce
 
-- name: DOCKER > Install packages
+- name: Instala Docker e restarta o serviço do mesmo
   apt:
-    name:
-      - docker-ce # Docker: the open-source application container engine
-      - docker-compose # Punctual, lightweight development environments using Docker
-    update_cache: yes
-
+    update_cache: yes #atualizando o package list
+    name: "{{ item }}"
+    state: present # latest present absent
+  loop:
+    - docker-ce # Docker: the open-source application container engine
+  notify:
+    - restart docker
+    
 - name: DOCKER > usermod
   shell: "{{item}}"
   with_items:
-     - "usermod -aG docker {{ current_user }}"
+      - "usermod -aG docker {{ current_user }}"

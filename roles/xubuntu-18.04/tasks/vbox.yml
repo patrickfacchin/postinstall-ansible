@@ -1,0 +1,25 @@
+---
+- name: APT_KEY > VBOX
+  apt_key: url=https://www.virtualbox.org/download/oracle_vbox_2016.asc
+- name: APT_KEY > VBOX
+  apt_key: url=https://www.virtualbox.org/download/oracle_vbox.asc
+
+- name: Repository > VBOX
+  apt_repository:
+    repo: deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
+    state: present
+
+- name: Instala pacotes/ferramentas para buildar o vbox
+  apt:
+    update_cache: yes #atualizando o package list
+    name: "{{ item }}"
+    state: latest # latest present absent
+    # changed_when: true
+  loop:
+    - gcc
+    - make
+    - linux-headers-{{ ansible_kernel }}
+    - dkms
+    - virtualbox-6.1
+  notify:
+    - recompile vbox

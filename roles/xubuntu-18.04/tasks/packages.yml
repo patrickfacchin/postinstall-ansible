@@ -51,7 +51,7 @@
     - vlc # player de videos
     - vim # editor de texto por linha de comando
     - whois # intelligent WHOIS client
-    - virtualbox # virtualização
+    - terminator # mult-term
     - tmux # terminal multiplexer
     - tor # anonymizing overlay network for TCP
     - vidcutter # the simplest + fastest video cutter & joiner 
@@ -67,7 +67,7 @@
 - name: Install NetExtender
   shell: "{{item}}"
   args:
-    chdir: "{{dist}}/files/"
+    chdir: "roles/{{flavor}}/files/"
   loop:
     - tar xvf NetExtender.x86_64.tgz
     - cd netExtenderClient/ && ./install

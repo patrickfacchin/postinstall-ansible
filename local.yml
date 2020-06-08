@@ -3,22 +3,27 @@
   hosts: localhost
   strategy: mitogen_linear
   connection: local
-  
-  pre_tasks:
-    - include: "{{dist}}/tasks/repos.yml"
-    - name: Update cache
-      apt:
-        update_cache: yes
-        
+  roles:
+    - "{{ flavor }}"
+################################# DEBUG #################################
+- hosts: localhost
+  connection: local
   tasks:
-    - include: "{{dist}}/tasks/packages.yml"
-    - include: "{{dist}}/tasks/docker.yml"
-    - include: "{{dist}}/tasks/virtualcam.yml"
-  
-  post_tasks:
-    - include: "{{dist}}/tasks/confs.yml"
-    - name: Cleanup
-      apt:
-        autoremove: yes
-        purge: yes
-
+    - name: OS and Kernel info
+      debug:
+        msg: "{{ msg.split('\n') }}"
+      vars:
+        msg: |
+          Distribution: {{ ansible_distribution }}
+          Release: {{ ansible_distribution_release }}
+          Distribution Version: {{ ansible_distribution_version }}
+          Distribution Major Version: {{ ansible_distribution_major_version }}
+          Kernel: {{ ansible_kernel }}
+          Architecture: {{ ansible_architecture }}
+        
+          
+    # - name: Display all variables/facts known for a host
+    #   debug:
+    #     var: hostvars[inventory_hostname]
+    #   tags: debug_info
+#########################################################################
