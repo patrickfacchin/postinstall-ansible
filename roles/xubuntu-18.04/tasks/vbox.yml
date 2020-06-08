@@ -6,7 +6,7 @@
 
 - name: Repository > VBOX
   apt_repository:
-    repo: deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
+    repo: deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
     state: present
 
 - name: Instala pacotes/ferramentas para buildar o vbox
