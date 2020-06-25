@@ -1,0 +1,23 @@
+#########################################################################################
+- name: CONFS ROOT
+  lineinfile:
+    path: "{{item.path}}"
+    regexp: "{{item.regexp}}"
+    line: "{{item.line}}"
+  loop:
+    - { path: '/etc/default/tor', regexp: 'RUN_DAEMON="yes"', line: 'RUN_DAEMON="no"' }
+#########################################################################################
+- name: CONFS {{current_user}}
+  shell: "{{item}}"
+  become: true
+  become_user: "{{current_user}}"
+  loop:
+    # GIT
+    - git config --global user.email "$(whoami)@$(whoami)"
+    - git config --global user.name "$(whoami)"
+    - git config --global core.editor vim
+    - git config --global alias.ignore '!git update-index --assume-unchanged'
+    - git config --global alias.unignore '!git update-index --no-assume-unchanged'
+    - git config --global alias.ignored '!git ls-files -v | grep ^[a-z]'
+    - git config --global alias.clone-branches '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t'
+#########################################################################################

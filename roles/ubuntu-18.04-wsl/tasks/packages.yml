@@ -1,0 +1,26 @@
+#########################################################################################
+- name: Install packages
+  apt: name={{ item }} state=present
+  loop:
+    - axel # downloads rapido | threds 
+    - elinks # navegador por linha de comando
+    - ffmpeg # Tools for transcoding, streaming and playing of multimedia files
+    - php # server-side, HTML-embedded scripting language (default)
+    - php-common # Common files for PHP packages
+    - php-mysql # MySQL module for PHP
+    - php-cli # PHP
+    - php-mbstring # Modulo MBSTRING do PHP
+    - pv # Shell pipeline element to meter data passing through
+    - speedtest-cli # command line interface for testing internet bandwidth using speedtest.net
+    - unrar # arquivos .rar
+    - whois # intelligent WHOIS client
+    - tor # anonymizing overlay network for TCP
+#########################################################################################
+- name: Install composer
+  shell: "{{item}}"
+  async: 45
+  poll: 5
+  loop:
+    - (cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php)
+    - mv /tmp/composer.phar /usr/local/bin/composer
+#########################################################################################

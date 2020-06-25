@@ -1,7 +1,7 @@
 ---
 - name: "Postinstall with Ansible and Git"
   hosts: localhost
-  strategy: mitogen_linear
+  # strategy: mitogen_linear
   connection: local
   roles:
     - "{{ flavor }}"
