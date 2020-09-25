@@ -1,0 +1,20 @@
+---
+  
+  - include: repos.yml
+
+  - name: Update cache
+    apt:
+      update_cache: yes
+
+  - include: packages.yml
+  - include: docker.yml
+  - include: docker_compose.yml
+  - include: docker_machine.yml
+  - include: composer.yml
+  - include: zsh.yml
+  - include: confs.yml
+  
+  - name: Cleanup
+    apt:
+      autoremove: yes
+      purge: yes

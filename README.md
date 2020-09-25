@@ -11,6 +11,12 @@ apt install -y ansible git
 
 ### Executando o playbook LOCAL
 
+
+``` sh
+sudo su
+ansible-playbook local.yml --extra-vars "current_user=<USER> flavor=ubuntu-18.04"
+```
+
 ``` sh
 sudo su
 ansible-playbook local.yml --extra-vars "current_user=<USER> flavor=ubuntu-18.04-wsl"
@@ -28,7 +34,14 @@ ansible-playbook local.yml --extra-vars "current_user=<USER> flavor=xubuntu-18.0
 sudo su
 ansible-pull \
     --url https://github.com/patrickfacchin/postinstall-ansible.git \
-    --extra-vars "current_user=monitauro flavor=ubuntu-18.04-wsl"
+    --extra-vars "current_user=<USER> flavor=ubuntu-18.04"
+```
+
+``` sh
+sudo su
+ansible-pull \
+    --url https://github.com/patrickfacchin/postinstall-ansible.git \
+    --extra-vars "current_user=<USER> flavor=ubuntu-18.04-wsl"
 ```
 
 ``` sh

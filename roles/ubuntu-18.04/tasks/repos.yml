@@ -1,0 +1,15 @@
+#########################################################################################
+- name: Repository > Cryptomator | multi-platform client-side encryption of your cloud files 
+  apt_repository:
+    repo: ppa:sebastian-stenzel/cryptomator
+    state: present
+    update_cache: no
+    filename: cryptomator
+#########################################################################################
+- name: Repository > PHP
+  apt_repository:
+    repo: ppa:ondrej/php
+    update_cache: no
+    state: present
+    filename: php
+#########################################################################################

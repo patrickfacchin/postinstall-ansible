@@ -1,6 +1,6 @@
 {
 	/**************************************************************************
-        *[BUGFIX] invisible underscore in integrated-term*/
+    *[BUGFIX] invisible underscore in integrated-term*/
     //"editor.fontFamily": "'Ubuntu Mono', monospace",
     "window.zoomLevel": -1,
 	/*************************************************************************/
@@ -9,4 +9,14 @@
 	"files.exclude": {
         "**/.git": false
 	},
+	"git.autofetch": true,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+    },
+    "editor.minimap.enabled": false
 }
+
+/* VSCODE extesoes gerais
+code --install-extension editorconfig.editorconfig
+*/

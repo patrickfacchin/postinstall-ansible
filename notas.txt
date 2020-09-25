@@ -1,0 +1,21 @@
+##############################################################################
+# NODE JS já vem com npm
+## Confirming "bionic" is supported...
+
++ curl -sLf -o /dev/null 'https://deb.nodesource.com/node_14.x/dists/bionic/Release'
+
+## Adding the NodeSource signing key to your keyring...
+
++ curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+OK
+
+
+
+## Run `sudo apt-get install -y nodejs` to install Node.js 14.x and npm
+## You may also need development tools to build native addons:
+     sudo apt-get install gcc g++ make
+## To install the Yarn package manager, run:
+     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update && sudo apt-get install yarn
+##############################################################################

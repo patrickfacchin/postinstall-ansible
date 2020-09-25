@@ -1,0 +1,11 @@
+---
+- name: Check if Composer is installed.
+  stat:
+    path: /usr/local/bin/composer
+  register: composer_bin
+
+- name: Run Composer installer.
+  command: >
+    (cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php)
+    mv /tmp/composer.phar /usr/local/bin/composer
+  when: not composer_bin.stat.exists

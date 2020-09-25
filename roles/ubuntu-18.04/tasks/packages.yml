@@ -1,0 +1,30 @@
+#########################################################################################
+- name: Install packages
+  apt: name={{ item }} state=present
+  loop:
+    - axel # downloads rapido | threds
+    - apache2-utils # utility programs for web servers | AB stress test
+    - cryptomator # multi-platform client-side encryption of your cloud files 
+    - dconf-editor # simple configuration storage system - graphical editor
+    - elinks # navegador por linha de comando
+    - ffmpeg # Tools for transcoding, streaming and playing of multimedia files
+    - gdebi # ferramenta para facilitar instalação de arquivos .deb
+    - gparted # gerenciador de partições
+    - libwebkitgtk-1.0-0 # Web content engine library for GTK+ | dependencia pulse vpn
+    - htop # software para visualizar o processamento, ....
+    - meld # diff de arquivos
+    - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
+    - php # server-side, HTML-embedded scripting language (default)
+    - php-common # Common files for PHP packages
+    - php-mysql # MySQL module for PHP
+    - php-cli # PHP
+    - php-mbstring # Modulo MBSTRING do PHP
+    - pv # Shell pipeline element to meter data passing through
+    - speedtest-cli # command line interface for testing internet bandwidth using speedtest.net
+    - unrar # arquivos .rar
+    - whois # intelligent WHOIS client
+    - terminator # mult-term
+    - tor # anonymizing overlay network for TCP
+    - vlc # player de videos
+    - vim # editor de texto por linha de comando
+#########################################################################################
