@@ -12,6 +12,21 @@
   become: true
   become_user: "{{current_user}}"
   loop:
+    # VSCODE
+    - code --install-extension alexkrechik.cucumberautocomplete
+    - code --install-extension vscoss.vscode-ansible
+    - code --install-extension ms-azuretools.vscode-docker
+    - code --install-extension editorconfig.editorconfig
+    - code --install-extension eamodio.gitlens
+    - code --install-extension shd101wyy.markdown-preview-enhanced 
+    - code --install-extension ryu1kn.partial-diff
+    - code --install-extension felixfbecker.php-debug
+    - code --install-extension neilbrayfield.php-docblocker
+    - code --install-extension bmewburn.vscode-intelephense-client
+    - code --install-extension ecodes.vscode-phpmd
+    - code --install-extension breezelin.phpstan
+    - code --install-extension ikappas.phpcs
+    - code --install-extension kokororin.vscode-phpfmt
     # GIT
     - git config --global user.email "$(whoami)@$(whoami)"
     - git config --global user.name "$(whoami)"
