@@ -27,6 +27,10 @@ sudo su
 ansible-playbook local.yml --extra-vars "current_user=<USER> flavor=xubuntu-18.04"
 ```
 
+``` sh
+sudo su
+ansible-playbook local.yml --extra-vars "current_user=<USER> flavor=xubuntu-20.04.1"
+```
 
 ### Executando o playbook REMOTO
 

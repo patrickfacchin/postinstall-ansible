@@ -1,0 +1,15 @@
+- name: ZSH > Install packages
+  apt: name={{ item }} state=present
+  loop: 
+    - zsh # shell with lots of features
+
+#########################################################################################  
+# TODO  
+# - name: Oh My Zsh > SETUP
+#   shell: "{{item}}"
+#   become: true
+#   become_user: "{{current_user}}"
+#   with_items:
+#     - sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+#########################################################################################

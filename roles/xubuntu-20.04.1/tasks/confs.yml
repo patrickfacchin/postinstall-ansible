@@ -1,0 +1,61 @@
+#########################################################################################
+# - name: CONFS ROOT
+#   lineinfile:
+#     path: "{{item.path}}"
+#     regexp: "{{item.regexp}}"
+#     line: "{{item.line}}"
+#   loop:
+#     - { path: '/etc/default/tor', regexp: 'RUN_DAEMON="yes"', line: 'RUN_DAEMON="no"' }
+#########################################################################################
+- name: CONFS {{current_user}}
+  shell: "{{item}}"
+  become: true
+  become_user: "{{current_user}}"
+  loop:
+    # VSCODE
+    - code --install-extension alexkrechik.cucumberautocomplete
+    - code --install-extension vscoss.vscode-ansible
+    - code --install-extension ms-azuretools.vscode-docker
+    - code --install-extension editorconfig.editorconfig
+    - code --install-extension eamodio.gitlens
+    - code --install-extension shd101wyy.markdown-preview-enhanced 
+    - code --install-extension ryu1kn.partial-diff
+    - code --install-extension felixfbecker.php-debug
+    - code --install-extension neilbrayfield.php-docblocker
+    - code --install-extension bmewburn.vscode-intelephense-client
+    - code --install-extension ecodes.vscode-phpmd
+    - code --install-extension breezelin.phpstan
+    - code --install-extension ikappas.phpcs
+    - code --install-extension kokororin.vscode-phpfmt
+    # SHORTCUTS
+    - xfconf-query --channel xfce4-keyboard-shortcuts --property '/commands/custom/<Super>e' --create --type string --set 'thunar'
+    - xfconf-query --channel xfce4-keyboard-shortcuts --property "/commands/custom/<Super>l" --create --type string --set "xflock4"
+    - xfconf-query --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Super>d" --reset
+    - xfconf-query --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Super>d" --create --type string --set "show_desktop_key"
+    # GIT
+    - git config --global user.email "$(whoami)@$(whoami)"
+    - git config --global user.name "$(whoami)"
+    - git config --global core.editor vim
+    - git config --global alias.tree            "log --graph --all --decorate --source --name-only"
+    - git config --global alias.lg              "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    - git config --global alias.ignore          '! git update-index --assume-unchanged'
+    - git config --global alias.unignore        '! git update-index --no-assume-unchanged'
+    - git config --global alias.ignored         '! git ls-files -v | grep ^[a-z]'
+    - git config --global alias.auto-mr         '! git commit --allow-empty -m "AUTO-MR"'
+    - git config --global alias.clone-branches  '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t'
+    - git config --global alias.analises        '! git add . && git commit --allow-empty -m "Analises ..." && git push' 
+#########################################################################################
+# Files
+- name: AVATAR > Copy
+  copy: src=roles/{{flavor}}/files/avatar.jpg dest=/home/{{current_user}}/.face owner={{current_user}} group={{current_user}} mode=600
+
+- name: VSCODE > Settings
+  become: true
+  become_user: "{{current_user}}"
+  copy: src=roles/{{flavor}}/files/settings.json dest=/home/{{current_user}}/.config/Code/User/settings.json
+#########################################################################################
+# - name: Geral
+#   shell: "{{item}}"
+#   with_items:
+#      - "rm /etc/apt/sources.list.d/google-chrome-stable.list"
+#########################################################################################

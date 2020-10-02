@@ -1,0 +1,9 @@
+---
+- name: restart docker
+  service:
+    name: docker
+    state: restarted
+
+- name: recompile vbox
+  shell: /sbin/vboxconfig
+  
