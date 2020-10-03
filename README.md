@@ -6,7 +6,9 @@
 ###### Requerimentos:
 
 ``` sh
-apt install -y ansible git
+apt install -y ansible git &&
+ansible-galaxy collection install community.general
+
 ```
 
 ###### Executando o playbook LOCAL

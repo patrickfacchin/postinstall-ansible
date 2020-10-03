@@ -1,3 +1,23 @@
+- name: Add a setting to ~/.gitconfig
+  become: true
+  become_user: "{{current_user}}"
+  community.general.git_config:
+    name: "{{item.name}}"
+    scope: global
+    value: "{{item.value}}"
+  loop:
+    - { name: 'user.email'          , value: '{{current_user}}@{{current_user}}' } 
+    - { name: 'user.name'           , value: '{{current_user}}' } 
+    - { name: 'core.editor'         , value: 'vim' } 
+    - { name: 'alias.tree'          , value: "log --graph --all --decorate --source --name-only" }
+    - { name: 'alias.lg'            , value: "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" } 
+    - { name: 'alias.ignore'        , value: '! git update-index --assume-unchanged' }
+    - { name: 'alias.unignore'      , value: '! git update-index --no-assume-unchanged' }
+    - { name: 'alias.ignored'       , value: '! git ls-files -v | grep ^[a-z]' }
+    - { name: 'alias.auto-mr'       , value: '! git commit --allow-empty -m "AUTO-MR"' }
+    - { name: 'alias.clone-branches', value: '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t' }
+    - { name: 'alias.analises'      , value: '! git add . && git commit --allow-empty -m "Analises ..." && git push' }
+    
 #########################################################################################
 # - name: CONFS ROOT
 #   lineinfile:
@@ -32,18 +52,7 @@
     - xfconf-query --channel xfce4-keyboard-shortcuts --property "/commands/custom/<Super>l" --create --type string --set "xflock4"
     - xfconf-query --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Super>d" --reset
     - xfconf-query --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Super>d" --create --type string --set "show_desktop_key"
-    # GIT
-    - git config --global user.email "$(whoami)@$(whoami)"
-    - git config --global user.name "$(whoami)"
-    - git config --global core.editor vim
-    - git config --global alias.tree            "log --graph --all --decorate --source --name-only"
-    - git config --global alias.lg              "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-    - git config --global alias.ignore          '! git update-index --assume-unchanged'
-    - git config --global alias.unignore        '! git update-index --no-assume-unchanged'
-    - git config --global alias.ignored         '! git ls-files -v | grep ^[a-z]'
-    - git config --global alias.auto-mr         '! git commit --allow-empty -m "AUTO-MR"'
-    - git config --global alias.clone-branches  '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t'
-    - git config --global alias.analises        '! git add . && git commit --allow-empty -m "Analises ..." && git push' 
+
 #########################################################################################
 # Files
 - name: AVATAR > Copy
@@ -59,3 +68,4 @@
 #   with_items:
 #      - "rm /etc/apt/sources.list.d/google-chrome-stable.list"
 #########################################################################################
+
