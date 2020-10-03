@@ -27,32 +27,39 @@
 #   loop:
 #     - { path: '/etc/default/tor', regexp: 'RUN_DAEMON="yes"', line: 'RUN_DAEMON="no"' }
 #########################################################################################
-- name: CONFS {{current_user}}
-  shell: "{{item}}"
+- name: VSCODE {{current_user}}
+  shell: "code --install-extension {{item}}"
   become: true
   become_user: "{{current_user}}"
   loop:
-    # VSCODE
-    - code --install-extension alexkrechik.cucumberautocomplete
-    - code --install-extension vscoss.vscode-ansible
-    - code --install-extension ms-azuretools.vscode-docker
-    - code --install-extension editorconfig.editorconfig
-    - code --install-extension eamodio.gitlens
-    - code --install-extension shd101wyy.markdown-preview-enhanced 
-    - code --install-extension ryu1kn.partial-diff
-    - code --install-extension felixfbecker.php-debug
-    - code --install-extension neilbrayfield.php-docblocker
-    - code --install-extension bmewburn.vscode-intelephense-client
-    - code --install-extension ecodes.vscode-phpmd
-    - code --install-extension breezelin.phpstan
-    - code --install-extension ikappas.phpcs
-    - code --install-extension kokororin.vscode-phpfmt
-    # SHORTCUTS
-    - xfconf-query --channel xfce4-keyboard-shortcuts --property '/commands/custom/<Super>e' --create --type string --set 'thunar'
-    - xfconf-query --channel xfce4-keyboard-shortcuts --property "/commands/custom/<Super>l" --create --type string --set "xflock4"
-    - xfconf-query --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Super>d" --reset
-    - xfconf-query --channel xfce4-keyboard-shortcuts --property "/xfwm4/custom/<Super>d" --create --type string --set "show_desktop_key"
-
+    - alexkrechik.cucumberautocomplete
+    - vscoss.vscode-ansible
+    - ms-azuretools.vscode-docker
+    - editorconfig.editorconfig
+    - eamodio.gitlens
+    - shd101wyy.markdown-preview-enhanced 
+    - ryu1kn.partial-diff
+    - felixfbecker.php-debug
+    - neilbrayfield.php-docblocker
+    - bmewburn.vscode-intelephense-client
+    - ecodes.vscode-phpmd
+    - breezelin.phpstan
+    - ikappas.phpcs
+    - kokororin.vscode-phpfmt
+#########################################################################################
+- name: SHORTCUTS {{current_user}}
+  become: true
+  become_user: "{{current_user}}"
+  xfconf:
+    channel: xfce4-keyboard-shortcuts
+    property: "{{item.property}}"
+    value_type: string
+    value: "{{item.value}}"
+  loop:
+    - { property: '/commands/custom/<Super>e' , value: 'thunar' } 
+    - { property: '/commands/custom/<Super>l' , value: 'xflock4' } 
+    - { property: '/xfwm4/custom/<Super>d'    , value: 'show_desktop_key' } 
+    
 #########################################################################################
 # Files
 - name: AVATAR > Copy
