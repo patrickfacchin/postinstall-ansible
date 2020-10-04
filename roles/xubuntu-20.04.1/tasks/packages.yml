@@ -47,10 +47,16 @@
     #- tor # anonymizing overlay network for TCP
     #- vidcutter # the simplest + fastest video cutter & joiner 
 #########################################################################################
+- name: Check if NetExtender is installed.
+  stat:
+    path: /usr/bin/netExtenderGui
+  register: netextender_bin
+
 - name: Install NetExtender
   shell: "{{item}}"
   args:
     chdir: "roles/{{flavor}}/files/"
+  when: not netextender_bin.stat.exists
   loop:
     - tar xvf NetExtender.x86_64.tgz
     - cd netExtenderClient/ && ./install
