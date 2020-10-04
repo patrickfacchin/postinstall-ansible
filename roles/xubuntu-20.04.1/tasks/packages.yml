@@ -30,7 +30,6 @@
     - gparted # gerenciador de partições
     - htop # software para visualizar o processamento, ....
     - meld # diff de arquivos
-    - #mysql-workbench # MYSQL ferramentas, modelagem, administração,...
     - nmap # software para scaner de portas
     #- obs-studio # OBS Studio for Ubuntu
     - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
@@ -66,3 +65,4 @@
   loop: 
     - postman # API Development Environment
     - code # Visual Studio Code
+    - mysql-workbench-community # MYSQL ferramentas, modelagem, administração,...
