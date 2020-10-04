@@ -31,7 +31,7 @@
     - htop # software para visualizar o processamento, ....
     - meld # diff de arquivos
     - nmap # software para scaner de portas
-    #- obs-studio # OBS Studio for Ubuntu
+    - obs-studio # OBS Studio for Ubuntu
     - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
     - pv # Shell pipeline element to meter data passing through
     - redshift-gtk # filtro de luz azul
