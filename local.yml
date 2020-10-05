@@ -1,10 +1,4 @@
 ---
-- name: "Postinstall with Ansible and Git"
-  hosts: localhost
-  # strategy: mitogen_linear
-  connection: local
-  roles:
-    - "{{ flavor }}"
 ################################# DEBUG #################################
 - hosts: localhost
   connection: local
@@ -27,3 +21,9 @@
     #     var: hostvars[inventory_hostname]
     #   tags: debug_info
 #########################################################################
+- name: "Postinstall with Ansible and Git"
+  hosts: localhost
+  # strategy: mitogen_linear
+  connection: local
+  roles:
+    - "{{ flavor }}"

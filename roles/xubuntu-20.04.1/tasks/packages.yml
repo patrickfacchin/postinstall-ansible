@@ -65,5 +65,37 @@
   snap: name={{ item }} state=present
   loop: 
     - postman # API Development Environment
-    - code # Visual Studio Code
     - mysql-workbench-community # MYSQL ferramentas, modelagem, administração,...
+
+- name: Install snap packages | CLASSIC
+  snap: name={{ item }} state=present classic=true
+  loop:
+    - code # Visual Studio Code
+#########################################################################################
+- name: Check VSCODE extensions
+  shell: code --list-extensions
+  become: true
+  become_user: "{{current_user}}"
+  register: vscode_extensions
+  
+- name: VSCODE {{current_user}}
+  shell: "code --install-extension {{item}}"
+  become: true
+  become_user: "{{current_user}}"
+  when: not ( item in vscode_extensions.stdout_lines )
+  loop:
+    - alexkrechik.cucumberautocomplete
+    - vscoss.vscode-ansible
+    - ms-azuretools.vscode-docker
+    - EditorConfig.EditorConfig
+    - eamodio.gitlens
+    - shd101wyy.markdown-preview-enhanced 
+    - ryu1kn.partial-diff
+    - felixfbecker.php-debug
+    - neilbrayfield.php-docblocker
+    - bmewburn.vscode-intelephense-client
+    - ecodes.vscode-phpmd
+    - breezelin.phpstan
+    - ikappas.phpcs
+    - kokororin.vscode-phpfmt
+#########################################################################################

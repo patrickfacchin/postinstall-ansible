@@ -26,27 +26,8 @@
 #     line: "{{item.line}}"
 #   loop:
 #     - { path: '/etc/default/tor', regexp: 'RUN_DAEMON="yes"', line: 'RUN_DAEMON="no"' }
-#########################################################################################
-- name: VSCODE {{current_user}}
-  shell: "code --install-extension {{item}}"
-  become: true
-  become_user: "{{current_user}}"
-  loop:
-    - alexkrechik.cucumberautocomplete
-    - vscoss.vscode-ansible
-    - ms-azuretools.vscode-docker
-    - editorconfig.editorconfig
-    - eamodio.gitlens
-    - shd101wyy.markdown-preview-enhanced 
-    - ryu1kn.partial-diff
-    - felixfbecker.php-debug
-    - neilbrayfield.php-docblocker
-    - bmewburn.vscode-intelephense-client
-    - ecodes.vscode-phpmd
-    - breezelin.phpstan
-    - ikappas.phpcs
-    - kokororin.vscode-phpfmt
-#########################################################################################
+
+########################################################################################
 - name: SHORTCUTS {{current_user}}
   become: true
   become_user: "{{current_user}}"
