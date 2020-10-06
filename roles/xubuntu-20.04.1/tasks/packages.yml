@@ -14,7 +14,7 @@
     - apache2-utils # utility programs for web servers | AB stress test
     - axel # downloads rapido | threds 
     - bmon # portable bandwidth monitor and rate estimator
-    #- breeze # Default Plasma theme (meta-package)
+    - breeze # Default Plasma theme (meta-package)
     - clamav # anti-virus utility for Unix # use: clamscan -r <path/file>
     #- code # IDE 
     - cryptomator # multi-platform client-side encryption of your cloud files 
