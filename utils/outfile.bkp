@@ -21,9 +21,9 @@ xsettings /Net/DoubleClickTime            400
 xsettings /Net/EnableEventSounds          false
 xsettings /Net/EnableInputFeedbackSounds  false
 xsettings /Net/FallbackIconTheme          gnome
-xsettings /Net/IconThemeName              breeze-dark
+xsettings /Net/IconThemeName              elementary-xfce-darker
 xsettings /Net/SoundThemeName             default
-xsettings /Net/ThemeName                  Greybird-dark
+xsettings /Net/ThemeName                  Greybird
 xsettings /Xft/Antialias                  1
 xsettings /Xft/DPI                        96
 xsettings /Xft/Hinting                    1
@@ -111,13 +111,13 @@ xfce4-desktop /backdrop/screen0/monitor3/image-style                  5
 xfce4-desktop /backdrop/screen0/monitorHDMI-1/workspace0/color-style  0
 xfce4-desktop /backdrop/screen0/monitorHDMI1/workspace0/color-style   0
 xfce4-desktop /backdrop/screen0/monitorHDMI-1/workspace0/image-style  5
-xfce4-desktop /backdrop/screen0/monitorHDMI1/workspace0/image-style   0
+xfce4-desktop /backdrop/screen0/monitorHDMI1/workspace0/image-style   5
 xfce4-desktop /backdrop/screen0/monitorHDMI-1/workspace0/last-image   /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
 xfce4-desktop /backdrop/screen0/monitorHDMI1/workspace0/last-image    /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
 xfce4-desktop /backdrop/screen0/monitorLVDS-1/workspace0/color-style  0
 xfce4-desktop /backdrop/screen0/monitorLVDS1/workspace0/color-style   0
 xfce4-desktop /backdrop/screen0/monitorLVDS-1/workspace0/image-style  5
-xfce4-desktop /backdrop/screen0/monitorLVDS1/workspace0/image-style   0
+xfce4-desktop /backdrop/screen0/monitorLVDS1/workspace0/image-style   5
 xfce4-desktop /backdrop/screen0/monitorLVDS-1/workspace0/last-image   /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
 xfce4-desktop /backdrop/screen0/monitorLVDS1/workspace0/last-image    /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
 xfce4-desktop /desktop-icons/file-icons/show-filesystem               true
@@ -182,7 +182,7 @@ xfwm4 /general/snap_resist                     false
 xfwm4 /general/snap_to_border                  true
 xfwm4 /general/snap_to_windows                 false
 xfwm4 /general/snap_width                      10
-xfwm4 /general/theme                           Numix
+xfwm4 /general/theme                           Greybird
 xfwm4 /general/tile_on_move                    true
 xfwm4 /general/title_alignment                 center
 xfwm4 /general/title_font                      Noto Sans Bold 9

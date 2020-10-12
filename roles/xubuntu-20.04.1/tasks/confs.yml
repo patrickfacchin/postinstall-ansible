@@ -40,6 +40,22 @@
     - { property: '/commands/custom/<Super>e' , value: 'thunar' } 
     - { property: '/commands/custom/<Super>l' , value: 'xflock4' } 
     - { property: '/xfwm4/custom/<Super>d'    , value: 'show_desktop_key' } 
+
+
+- name: XFCONF GERAL {{current_user}}
+  become: true
+  become_user: "{{current_user}}"
+  xfconf:
+    channel: "{{item.channel}}"
+    property: "{{item.property}}"
+    value_type: string
+    value: "{{item.value}}"
+  loop:
+    - { channel: 'xsettings' , property: '/Net/IconThemeName' , value: 'breeze-dark' }
+    - { channel: 'xsettings' , property: '/Net/ThemeName'     , value: 'Greybird-dark' }
+    - { channel: 'xfwm4'     , property: '/general/theme'     , value: 'Numix' }
+    - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI1/workspace0/image-style' , value: '0' } 
+    - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS1/workspace0/image-style' , value: '0' }
     
 #########################################################################################
 # Files
