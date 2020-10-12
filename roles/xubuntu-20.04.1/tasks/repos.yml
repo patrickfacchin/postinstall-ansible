@@ -6,15 +6,15 @@
     update_cache: no
     filename: cryptomator
 #########################################################################################
-- name: APT_KEY > Google Chrome
-  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+# - name: APT_KEY > Google Chrome
+#   apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
 
-- name: Repository > Google Chrome
-  apt_repository:
-    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-    update_cache: no
-    state: present
-    filename: google-chrome
+# - name: Repository > Google Chrome
+#   apt_repository:
+#     repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+#     update_cache: no
+#     state: present
+#     filename: google-chrome
 #########################################################################################
 # - name: Repository > OBS-STUDIO
 #   apt_repository:

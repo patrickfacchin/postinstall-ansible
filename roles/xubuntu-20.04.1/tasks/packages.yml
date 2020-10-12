@@ -26,7 +26,7 @@
     - git # fast, scalable, distributed revision control system
     - gnome-disk-utility # manage and configure disk drives and media
     - gnupg-agent # GNU privacy guard - cryptographic agent (dummy transitional package)
-    - google-chrome-stable # navegador
+    # - google-chrome-stable # navegador
     - gparted # gerenciador de partições
     - htop # software para visualizar o processamento, ....
     - meld # diff de arquivos
@@ -46,6 +46,13 @@
     - terminator # mult-term
     #- tor # anonymizing overlay network for TCP
     #- vidcutter # the simplest + fastest video cutter & joiner 
+
+- name: Install a .deb package from the internet
+  apt:
+    deb: "{{ item }}"
+  loop:
+    - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    
 #########################################################################################
 - name: Check if NetExtender is installed.
   stat:
