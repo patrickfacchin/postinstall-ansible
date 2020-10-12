@@ -11,7 +11,7 @@
   - include: docker_compose.yml
   - include: docker_machine.yml
   - include: vbox.yml
-  #- include: virtualcam.yml
+  - include: virtualcam.yml
   - include: zsh.yml
   - include: confs.yml
   
