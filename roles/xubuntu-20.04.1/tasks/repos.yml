@@ -16,12 +16,12 @@
 #     state: present
 #     filename: google-chrome
 #########################################################################################
-# - name: Repository > OBS-STUDIO
-#   apt_repository:
-#     repo: ppa:obsproject/obs-studio
-#     update_cache: no
-#     state: present
-#     filename: obs-studio
+- name: Repository > OBS-STUDIO
+  apt_repository:
+    repo: ppa:obsproject/obs-studio
+    update_cache: no
+    state: present
+    filename: obs-studio
 #########################################################################################
 # - name: Repository > Vidcutter | the simplest + fastest video cutter & joiner 
 #   apt_repository:

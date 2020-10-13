@@ -14,25 +14,25 @@
 
 #########################################################################################
 # TODO: compilar lib?
-# - git:
-#     repo: 'https://github.com/obsproject/obs-studio.git'
-#     dest: /srv/obs-studio
+- git:
+    repo: 'https://github.com/obsproject/obs-studio.git'
+    dest: /srv/obs-studio
 
-# - git:
-#     repo: 'https://github.com/CatxFish/obs-v4l2sink.git'
-#     dest: /srv/obs-v4l2sink
+- git:
+    repo: 'https://github.com/CatxFish/obs-v4l2sink.git'
+    dest: /srv/obs-v4l2sink
 
 # #########################################################################################
 # TODO: compilar lib?
-# - name: VCAM > CREATE DIR
-#   shell: mkdir -p /srv/obs-v4l2sink/build
+- name: VCAM > CREATE DIR
+  shell: mkdir -p /srv/obs-v4l2sink/build
 
-# - name: VCAM > MAKE
-#   shell: "{{item}}"
-#   args:
-#     chdir: /srv/obs-v4l2sink/build
-#   with_items:
-#     - 'cmake -DLIBOBS_INCLUDE_DIR="../../obs-studio/libobs" -DCMAKE_INSTALL_PREFIX=/usr ..'
-#     - 'make -j4'
-#     - 'make install > /tests.txt'
+- name: VCAM > MAKE
+  shell: "{{item}}"
+  args:
+    chdir: /srv/obs-v4l2sink/build
+  with_items:
+    - 'cmake -DLIBOBS_INCLUDE_DIR="../../obs-studio/libobs" -DCMAKE_INSTALL_PREFIX=/usr ..'
+    - 'make -j4'
+    - 'make install > /srv/obs-v4l2sink.txt'
 #########################################################################################
