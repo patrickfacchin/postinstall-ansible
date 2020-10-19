@@ -108,4 +108,5 @@
     - breezelin.phpstan
     - ikappas.phpcs
     - kokororin.vscode-phpfmt
+    - mhutchie.git-graph
 #########################################################################################
