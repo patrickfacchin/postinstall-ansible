@@ -6,22 +6,31 @@
     - cmake # cross-platform, open-source make system
 
 #########################################################################################
+- name: Check if v4l2loopback is installed.
+  stat:
+    path: /etc/modprobe.d/v4l2loopback.conf
+  register: v4l2loopback_conf
+#########################################################################################
 - git:
     repo: 'https://github.com/obsproject/obs-studio.git'
     dest: /srv/obs-studio
+  when: not v4l2loopback_conf.stat.exists
 
 - git:
     repo: 'https://github.com/CatxFish/obs-v4l2sink.git'
     dest: /srv/obs-v4l2sink
+  when: not v4l2loopback_conf.stat.exists
 
 #########################################################################################
 - name: VCAM > CREATE DIR
   shell: mkdir -p /srv/obs-v4l2sink/build
+  when: not v4l2loopback_conf.stat.exists
 
 - name: VCAM > MAKE
   shell: "{{item}}"
   args:
     chdir: /srv/obs-v4l2sink/build
+  when: not v4l2loopback_conf.stat.exists
   with_items:
     - 'cmake -DLIBOBS_INCLUDE_DIR="../../obs-studio/libobs" -DCMAKE_INSTALL_PREFIX=/usr ..'
     - 'make -j4'
@@ -29,6 +38,7 @@
 #########################################################################################
 - name: VCAM > SETUP
   shell: "{{item}}"
+  when: not v4l2loopback_conf.stat.exists
   with_items:
     # We need to set up the virtual camera device. I use /dev/video10 to not collide with any existing devices
     # update-initramfs -c -k $(uname -r)
