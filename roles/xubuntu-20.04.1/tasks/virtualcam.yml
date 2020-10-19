@@ -5,15 +5,7 @@
     - qtbase5-dev # Qt 5 base development files
     - cmake # cross-platform, open-source make system
 
-#########################################################################################    
-- name: VCAM > SETUP
-  shell: "{{item}}"
-  with_items:
-    # We need to set up the virtual camera device. I use /dev/video10 to not collide with any existing devices
-    - 'modprobe v4l2loopback devices=1 video_nr=10 card_label="OBS Cam" exclusive_caps=1'
-
 #########################################################################################
-# TODO: compilar lib?
 - git:
     repo: 'https://github.com/obsproject/obs-studio.git'
     dest: /srv/obs-studio
@@ -22,8 +14,7 @@
     repo: 'https://github.com/CatxFish/obs-v4l2sink.git'
     dest: /srv/obs-v4l2sink
 
-# #########################################################################################
-# TODO: compilar lib?
+#########################################################################################
 - name: VCAM > CREATE DIR
   shell: mkdir -p /srv/obs-v4l2sink/build
 
@@ -36,3 +27,12 @@
     - 'make -j4'
     - 'make install > /srv/obs-v4l2sink.txt'
 #########################################################################################
+- name: VCAM > SETUP
+  shell: "{{item}}"
+  with_items:
+    # We need to set up the virtual camera device. I use /dev/video10 to not collide with any existing devices
+    # update-initramfs -c -k $(uname -r)
+    # lsmod | grep -i v4l2loopback
+    - echo "v4l2loopback" >> /etc/modules
+    - echo "options v4l2loopback devices=1 video_nr=10 card_label='OBS Cam' exclusive_caps=1" > /etc/modprobe.d/v4l2loopback.conf
+#########################################################################################    
