@@ -76,6 +76,7 @@
   loop: 
     - postman # API Development Environment
     - mysql-workbench-community # MYSQL ferramentas, modelagem, administração,...
+    - pomatez # Pomodoro
 
 - name: Install snap packages | CLASSIC
   snap: name={{ item }} state=present classic=true
