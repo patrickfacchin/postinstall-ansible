@@ -31,6 +31,7 @@
     - htop # software para visualizar o processamento, ....
     - meld # diff de arquivos
     - mesa-utils # Miscellaneous Mesa GL utilities
+    - net-tools # NET-3 networking toolkit
     - nmap # software para scaner de portas
     - obs-studio # OBS Studio for Ubuntu
     - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
