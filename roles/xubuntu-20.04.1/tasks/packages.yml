@@ -34,6 +34,7 @@
     - nmap # software para scaner de portas
     - obs-studio # OBS Studio for Ubuntu
     - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
+    - openconnect # open client for Cisco AnyConnect, Pulse, GlobalProtect VPN
     - pv # Shell pipeline element to meter data passing through
     - redshift-gtk # filtro de luz azul
     - speedtest-cli # command line interface for testing internet bandwidth using speedtest.net
