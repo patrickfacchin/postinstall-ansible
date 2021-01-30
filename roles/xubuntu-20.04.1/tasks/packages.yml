@@ -16,7 +16,6 @@
     - bmon # portable bandwidth monitor and rate estimator
     - breeze # Default Plasma theme (meta-package)
     - clamav # anti-virus utility for Unix # use: clamscan -r <path/file>
-    #- code # IDE 
     - cryptomator # multi-platform client-side encryption of your cloud files 
     - curl # programa para trasnferir dados para sites
     - default-jre # Standard Java or Java compatible Runtime
@@ -26,9 +25,9 @@
     - git # fast, scalable, distributed revision control system
     - gnome-disk-utility # manage and configure disk drives and media
     - gnupg-agent # GNU privacy guard - cryptographic agent (dummy transitional package)
-    # - google-chrome-stable # navegador
     - gparted # gerenciador de partições
     - htop # software para visualizar o processamento, ....
+    - jq # lightweight and flexible command-line JSON processor
     - meld # diff de arquivos
     - mesa-utils # Miscellaneous Mesa GL utilities
     - net-tools # NET-3 networking toolkit
