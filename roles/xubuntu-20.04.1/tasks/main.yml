@@ -14,6 +14,7 @@
   - include: virtualcam.yml
   - include: zsh.yml
   - include: confs.yml
+  - include: fix.yml
   
   # TODO
   # - name: Restarted service lightdm

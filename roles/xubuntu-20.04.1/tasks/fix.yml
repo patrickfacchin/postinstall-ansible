@@ -1,0 +1,8 @@
+#########################################################################################
+#needs reboot
+- name: Fix thunar doesn't show image/video thumbnails 
+  apt: name={{ item }} state=present
+  loop:
+    - tumbler # D-Bus thumbnailing service
+    - tumbler-plugins-extra # D-Bus thumbnailing service (additional plugins)
+    - ffmpegthumbnailer # fast and lightweight video thumbnailer
