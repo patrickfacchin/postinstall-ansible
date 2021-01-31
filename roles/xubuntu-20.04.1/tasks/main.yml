@@ -6,13 +6,13 @@
     apt:
       update_cache: yes
 
-  - include: packages.yml
-  - include: docker.yml
-  - include: docker_compose.yml
-  - include: docker_machine.yml
-  - include: vbox.yml
-  - include: virtualcam.yml
-  - include: zsh.yml
+  # - include: packages.yml
+  # - include: docker.yml
+  # - include: docker_compose.yml
+  # - include: docker_machine.yml
+  # - include: vbox.yml
+  # - include: virtualcam.yml
+  # - include: zsh.yml
   - include: confs.yml
   - include: fix.yml
   
