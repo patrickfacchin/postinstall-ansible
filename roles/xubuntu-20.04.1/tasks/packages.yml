@@ -53,8 +53,9 @@
     deb: "{{ item }}"
   loop:
     - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_90.0.4400.8-1_amd64.deb
     # - https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_85.0.4183.121-1_amd64.deb
-    - https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.3.00.25560_amd64.deb
+    # - https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.3.00.25560_amd64.deb
     - https://github.com/jgraph/drawio-desktop/releases/download/v13.7.9/draw.io-amd64-13.7.9.deb
     
 #########################################################################################
