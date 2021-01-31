@@ -16,10 +16,10 @@
     - { name: 'alias.ignored'               , value: '! git ls-files -v | grep ^[a-z]' }
     - { name: 'alias.clone-branches'        , value: '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t' }
     - { name: 'alias.analises'              , value: '! git add . && git commit --allow-empty -m "Analises ..." && git push' }
-    # - { name: 'alias.track-branch'          , value: "! git commit --allow-empty -m \'Track Branch\' && git push -u origin $(git symbolic-ref --short -q HEAD)" }
-    # - { name: 'alias.cmd-merge-request'     , value: "! git commit --allow-empty -m \'cmd: merge-request\' && git push" }
-    # - { name: 'alias.cmd-merge-request-fix' , value: "! git commit --allow-empty -m \'cmd: merge-request-fix\' && git push" }
-    # - { name: 'alias.cmd-push-clear'        , value: "! git commit --allow-empty -m \'cmd: push-clear\' && git push" }
+    - { name: 'alias.track-branch'          , value: '! git commit --allow-empty -m "Track Branch" && git push -u origin $(git symbolic-ref --short -q HEAD)' }
+    - { name: 'alias.cmd-merge-request'     , value: '! git commit --allow-empty -m "cmd: merge-request" && git push' }
+    - { name: 'alias.cmd-merge-request-fix' , value: '! git commit --allow-empty -m "cmd: merge-request-fix" && git push' }
+    - { name: 'alias.cmd-push-clear'        , value: '! git commit --allow-empty -m "cmd: push-clear" && git push' }
     
 #########################################################################################
 # - name: CONFS ROOT

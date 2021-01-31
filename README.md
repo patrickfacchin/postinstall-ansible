@@ -7,8 +7,7 @@
 
 ``` sh
 apt install -y ansible git && \
-ansible-galaxy collection install community.general
-
+ansible-galaxy collection install community.general:1.3.0
 ```
 
 ###### Executando o playbook LOCAL
