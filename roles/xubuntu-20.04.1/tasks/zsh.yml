@@ -17,8 +17,6 @@
 
 - name: ZSH > Switch SHELL
   user: name={{current_user}} shell={{ zsh_path.stdout }}
-  become: true
-  become_user: "{{current_user}}"
   when: not zsh_bin.stat.exists
 
 - name: Oh My Zsh > SETUP
