@@ -79,6 +79,7 @@
     # - postman # API Development Environment
     - mysql-workbench-community # MYSQL ferramentas, modelagem, administração,...
     - pomatez # Pomodoro
+    - discord # All-in-one voice and text chat for gamers that's free, secure, ....
 
 - name: Install snap packages | CLASSIC
   snap: name={{ item }} state=present classic=true
