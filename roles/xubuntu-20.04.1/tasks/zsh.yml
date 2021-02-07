@@ -1,15 +1,40 @@
+- name: ZSH > Check if zsh is already installed
+  stat:
+    path: "/home/{{current_user}}/.oh-my-zsh"
+  register: zsh_bin
+
 - name: ZSH > Install packages
   apt: name={{ item }} state=present
   loop: 
     - zsh # shell with lots of features
+    - zsh-syntax-highlighting # Fish shell like syntax highlighting for zsh
+  when: not zsh_bin.stat.exists
 
-#########################################################################################  
-# TODO  
-# - name: Oh My Zsh > SETUP
-#   shell: "{{item}}"
-#   become: true
-#   become_user: "{{current_user}}"
-#   with_items:
-#     - sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+- name: ZSH > Get path
+  command: which zsh 
+  register: zsh_path
+  when: not zsh_bin.stat.exists
 
-#########################################################################################
+- name: ZSH > Switch SHELL
+  user: name={{current_user}} shell={{ zsh_path.stdout }}
+  become: true
+  become_user: "{{current_user}}"
+  when: not zsh_bin.stat.exists
+
+- name: Oh My Zsh > SETUP
+  shell: "{{item}}"
+  become: true
+  become_user: "{{current_user}}"
+  with_items:
+    - sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --skip-chsh"
+  when: not zsh_bin.stat.exists
+
+- name: youtube-dl > Add alias 'do'
+  lineinfile:
+    path: /home/{{current_user}}/.zshrc 
+    line: "source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    owner: "{{current_user}}"
+    regexp: "^source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh$"
+    state: present
+    insertafter: EOF
+    create: True
