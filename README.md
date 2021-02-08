@@ -27,7 +27,7 @@ ansible-pull \
 
 
 ---
-#### XUBUNTU 18.04
+#### XUBUNTU 18.04 [ DEPRECATED ]
 
 ###### Requerimentos:
 
@@ -55,7 +55,7 @@ ansible-pull \
 
 
 ---
-#### UBUNTU 18.04
+#### UBUNTU 18.04 [ DEPRECATED ]
 
 ###### Requerimentos:
 
@@ -83,7 +83,7 @@ ansible-pull \
 
 
 ---
-#### UBUNTU 18.04 WSL
+#### UBUNTU 18.04 WSL [ DEPRECATED ]
 
 ###### Requerimentos:
 
