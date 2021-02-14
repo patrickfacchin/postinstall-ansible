@@ -57,10 +57,10 @@
     - { channel: 'xsettings' , property: '/Net/IconThemeName' , value_type: 'string', value: 'breeze-dark' }
     - { channel: 'xsettings' , property: '/Net/ThemeName'     , value_type: 'string', value: 'Greybird-dark' }
     - { channel: 'xfwm4'     , property: '/general/theme'     , value_type: 'string', value: 'Numix' }
-    - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI1/workspace0/image-style' , value_type: 'int', value: '0' } 
-    - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS1/workspace0/image-style' , value_type: 'int', value: '0' }
-    - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI-1/workspace0/image-style' , value_type: 'int', value: '0' } 
-    - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS-1/workspace0/image-style' , value_type: 'int', value: '0' }
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI1/workspace0/image-style' , value_type: 'int', value: '0' } 
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS1/workspace0/image-style' , value_type: 'int', value: '0' }
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI-1/workspace0/image-style' , value_type: 'int', value: '0' } 
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS-1/workspace0/image-style' , value_type: 'int', value: '0' }
     
 #########################################################################################
 # Files
@@ -86,7 +86,7 @@
     insertafter: EOF
     create: True
 
-- name: youtube-dl > Add alias 'do'
+- name: youtube-dl > Add alias 'dol'
   lineinfile:
     path: /home/{{current_user}}/.zsh_aliases 
     line: "alias do='youtube-dl -f best -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'"
@@ -96,12 +96,12 @@
     insertafter: EOF
     create: True
 
-- name: youtube-dl > Add alias 'do'
+- name: youtube-dl > Add alias 'dol'
   lineinfile:
     path: /home/{{current_user}}/.zsh_aliases 
     line: "alias dol='youtube-dl -f worst -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'"
     owner: "{{current_user}}"
-    regexp: "^alias do='youtube-dl -f worst -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'$"
+    regexp: "^alias dol='youtube-dl -f worst -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'$"
     state: present
     insertafter: EOF
     create: True
