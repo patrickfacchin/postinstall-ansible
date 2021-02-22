@@ -1,0 +1,140 @@
+#########################################################################################
+- name: Remove packages
+  apt: name={{ item }} purge=yes state=absent
+  loop: 
+    - snapd #  Daemon and tooling that enable snap packages
+#########################################################################################
+- name: Install packages
+  apt: name={{ item }} state=present
+  loop:
+    - apt-transport-https # transitional package for https support 
+    - curl # programa para trasnferir dados para sites
+    - git # fast, scalable, distributed revision control system
+    - software-properties-common # manage the repositories that you install software from (common)
+    - wget # retrieves files from the web
+    #####################################################################################
+    - apache2-utils # utility programs for web servers | AB stress test
+    - axel # downloads rapido | threds 
+    - bmon # portable bandwidth monitor and rate estimator
+#   - breeze # Default Plasma theme (meta-package)
+    - code # Code editing. Redefined.
+    - clamav # anti-virus utility for Unix # use: clamscan -r <path/file>
+    - cryptomator # multi-platform client-side encryption of your cloud files 
+    - default-jre # Standard Java or Java compatible Runtime
+    - dconf-editor # simple configuration storage system - graphical editor
+    - elinks # navegador por linha de comando
+    - ffmpeg # Tools for transcoding, streaming and playing of multimedia files
+    - gdebi # ferramenta para facilitar instalação de arquivos .deb
+    - google-chrome-beta # The web browser from Google
+    - google-chrome-stable # The web browser from Google
+    - google-chrome-unstable # The web browser from Google
+    - gparted # gerenciador de partições
+    - htop # software para visualizar o processamento, ....
+    - jq # lightweight and flexible command-line JSON processor
+    - meld # diff de arquivos
+#   - mesa-utils # Miscellaneous Mesa GL utilities
+    - net-tools # NET-3 networking toolkit
+    - nmap # software para scaner de portas
+    - obs-studio # OBS Studio for Ubuntu
+    - openfortivpn # Fortinet client for PPP+SSL VPN tunnel services
+    - openconnect # open client for Cisco AnyConnect, Pulse, GlobalProtect VPN
+    - pv # Shell pipeline element to meter data passing through
+    - redshift-gtk # filtro de luz azul
+    - speedtest-cli # command line interface for testing internet bandwidth using speedtest.net
+    - unrar # arquivos .rar
+    - kdenlive # non-linear video editor
+    - vlc # player de videos
+    - vim # editor de texto por linha de comando
+    - whois # intelligent WHOIS client
+    - teams # Microsoft Teams for Linux is your chat-centered workspace in Office 365.
+    - terminator # mult-term
+
+- name: Install a .deb package from the internet
+  apt:
+    deb: "{{ item }}"
+  loop:
+    # Diagram software for making flowcharts, process diagrams, org charts, UML, ER and network diagrams
+    - https://github.com/jgraph/drawio-desktop/releases/download/v13.7.9/draw.io-amd64-13.7.9.deb
+    # Pomodoro
+    - https://github.com/roldanjr/pomatez/releases/download/v1.1.0/Pomatez-v1.1.0-linux.deb
+    # Discord is an application for text, image, video and audio communication, which was developed for video gaming communities.
+    - https://discordapp.com/api/download?platform=linux&format=deb
+    # MySQL DEV
+    - https://cdn.mysql.com//Downloads/MySQLGUITools/mysql-workbench-community_8.0.23-1ubuntu20.10_amd64.deb
+
+#########################################################################################
+- name: Check if 'google-chrome-beta.list' is installed.
+  stat:
+    path: /etc/apt/sources.list.d/google-chrome-beta.list
+  register: google_chrome_files
+
+- name: Delete google chrome files
+  file:
+    path: "{{ item }}"
+    state: absent
+  when: google_chrome_files.stat.exists
+  with_items:
+    - /etc/apt/sources.list.d/google-chrome-beta.list
+    - /etc/apt/sources.list.d/google-chrome-unstable.list
+#########################################################################################
+- name: Check if NetExtender is installed.
+  stat:
+    path: /usr/bin/netExtenderGui
+  register: netextender_bin
+
+- name: Install NetExtender
+  shell: "{{item}}"
+  args:
+    chdir: "roles/{{flavor}}/files/"
+  when: not netextender_bin.stat.exists
+  loop:
+    - tar xvf NetExtender.x86_64.tgz
+    - cd netExtenderClient/ && ./install
+#########################################################################################
+# - name: Install snap packages
+#   snap: name={{ item }} state=present
+#   loop: 
+#     # - postman # API Development Environment
+#     - name # desc
+#########################################################################################
+- name: Check VSCODE extensions
+  shell: code --list-extensions
+  become: true
+  become_user: "{{current_user}}"
+  register: vscode_extensions
+  
+- name: VSCODE {{current_user}}
+  shell: "code --install-extension {{item}}"
+  become: true
+  become_user: "{{current_user}}"
+  when: not ( item in vscode_extensions.stdout_lines )
+  loop:
+    - alexkrechik.cucumberautocomplete
+    - vscoss.vscode-ansible
+    - ms-azuretools.vscode-docker
+    - EditorConfig.EditorConfig
+    - eamodio.gitlens
+    - shd101wyy.markdown-preview-enhanced 
+    - ryu1kn.partial-diff
+    - felixfbecker.php-debug
+    - neilbrayfield.php-docblocker
+    - bmewburn.vscode-intelephense-client
+    - ecodes.vscode-phpmd
+    - breezelin.phpstan
+    - ikappas.phpcs
+    - kokororin.vscode-phpfmt
+    - mhutchie.git-graph
+#########################################################################################
+- name: youtube-dl > Check if youtube-dl is already installed
+  stat:
+    path: "/usr/local/bin/youtube-dl"
+  register: youtubedl_bin
+
+- name: youtube-dl > Download from source move to executables folder and set permissions
+  get_url:
+    url: http://yt-dl.org/latest/youtube-dl
+    dest: "/usr/local/bin/youtube-dl"
+    mode: 0755
+    force: yes
+  when: not youtubedl_bin.stat.exists
+#########################################################################################

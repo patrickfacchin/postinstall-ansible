@@ -1,0 +1,35 @@
+#########################################################################################
+- name: APT_KEY > MICROSOFT
+  apt_key: url=https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Repository > VSCODE
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    update_cache: no
+    state: present
+    filename: code
+
+- name: Repository > MSTEAMS
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+    update_cache: no
+    state: present
+    filename: teams
+#########################################################################################
+- name: Repository > CRYPTOMATOR | multi-platform client-side encryption of your cloud files 
+  apt_repository:
+    repo: ppa:sebastian-stenzel/cryptomator
+    state: present
+    update_cache: no
+    filename: cryptomator
+#########################################################################################
+- name: APT_KEY > GOOGLE
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+- name: Repository > Google Chrome
+  apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    update_cache: no
+    state: present
+    filename: google-chrome
+#########################################################################################
