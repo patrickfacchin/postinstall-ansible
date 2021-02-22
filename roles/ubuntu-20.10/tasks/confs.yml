@@ -84,13 +84,16 @@
 - name: youtube-dl > Add include 'alias'
   lineinfile:
     path: /home/{{current_user}}/.zshrc 
-    line: "source ~/.zsh_aliases"
+    line: "{{item.source}}"
     owner: "{{current_user}}"
-    regexp: "^source ~/.zsh_aliases$"
+    regexp: "^{{item.source}}$"
     state: present
     insertafter: EOF
     create: True
-
+  loop:
+    - { source: "source ~/.zsh_aliases" }
+    - { source: "source ~/.zsh_confs" }
+    
 - name: youtube-dl > Add alias 'do'
   lineinfile:
     path: /home/{{current_user}}/.zsh_aliases 
@@ -110,4 +113,9 @@
     state: present
     insertafter: EOF
     create: True
+
+- name: ZSH > Confs
+  become: true
+  become_user: "{{current_user}}"
+  copy: src=roles/{{flavor}}/files/.zsh_confs dest=/home/{{current_user}}/.zsh_confs owner={{current_user}} group={{current_user}} mode=600
 #########################################################################################
