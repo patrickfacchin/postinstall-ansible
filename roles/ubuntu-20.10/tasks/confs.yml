@@ -69,8 +69,6 @@
   become_user: "{{current_user}}"
   copy: src=roles/{{flavor}}/files/avatar.jpg dest=/home/{{current_user}}/.face owner={{current_user}} group={{current_user}} mode=600
 - name: AVATAR > Copy
-  become: true
-  become_user: "{{current_user}}"
   copy: src=roles/{{flavor}}/files/avatar.jpg dest=/var/lib/AccountsService/icons/{{current_user}} owner={{current_user}} group={{current_user}} mode=600
 
 
