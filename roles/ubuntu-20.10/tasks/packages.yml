@@ -32,7 +32,7 @@
     - htop # software para visualizar o processamento, ....
     - jq # lightweight and flexible command-line JSON processor
     - meld # diff de arquivos
-#   - mesa-utils # Miscellaneous Mesa GL utilities
+    - mesa-utils # Miscellaneous Mesa GL utilities
     - net-tools # NET-3 networking toolkit
     - nmap # software para scaner de portas
     - obs-studio # OBS Studio for Ubuntu
