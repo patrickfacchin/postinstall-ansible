@@ -52,10 +52,8 @@
 
 
 - name: THEME CONF {{current_user}}
-  
   become: true
   become_user: "{{current_user}}"
-  
   dconf:
     key: "/org/gnome{{item.property}}"
     value: "{{item.value}}"
@@ -71,7 +69,7 @@
     
 
 #########################################################################################
-# Files
+# AVATAR
 - name: AVATAR > Copy
   become: true
   become_user: "{{current_user}}"
@@ -79,10 +77,22 @@
 - name: AVATAR > Copy
   copy: src=roles/{{flavor}}/files/avatar.jpg dest=/var/lib/AccountsService/icons/{{current_user}} owner={{current_user}} group={{current_user}} mode=600
 
+#########################################################################################
+# TERMINAL
+- name: TERMINATOR > Confs Create a directory if it does not exist
+  become: true
+  become_user: "{{current_user}}"
+  ansible.builtin.file:
+    path: /home/{{current_user}}/.config/terminator
+    state: directory
+    mode: '0755'
 
-# - name: TERMINAL > Confs
-#   copy: src=roles/{{flavor}}/files/terminator_config dest=/home/{{current_user}}/.config/terminator/ owner={{current_user}} group={{current_user}} mode=600
-
+- name: TERMINATOR > Confs
+  become: true
+  become_user: "{{current_user}}"
+  copy: src=roles/{{flavor}}/files/terminator_config dest=/home/{{current_user}}/.config/terminator/config owner={{current_user}} group={{current_user}} mode=600
+#########################################################################################
+# VSCODE
 - name: VSCODE > Settings
   become: true
   become_user: "{{current_user}}"
