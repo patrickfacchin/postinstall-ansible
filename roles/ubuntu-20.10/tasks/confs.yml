@@ -50,18 +50,26 @@
   loop:
     - { property: '/always-use-location-entry'     , value: "true" } 
 
-# - name: XFCONF GERAL {{current_user}}
-#   become: true
-#   become_user: "{{current_user}}"
-#   xfconf:
-#     channel: "{{item.channel}}"
-#     property: "{{item.property}}"
-#     value_type: "{{item.value_type}}"
-#     value: "{{item.value}}"
-#   loop:
-#     - { channel: 'xsettings' , property: '/Net/IconThemeName' , value_type: 'string', value: 'breeze-dark' }
-#     - { channel: 'xsettings' , property: '/Net/ThemeName'     , value_type: 'string', value: 'Greybird-dark' }
-#     - { channel: 'xfwm4'     , property: '/general/theme'     , value_type: 'string', value: 'Numix' }
+
+- name: THEME CONF {{current_user}}
+  
+  become: true
+  become_user: "{{current_user}}"
+  
+  dconf:
+    key: "/org/gnome{{item.property}}"
+    value: "{{item.value}}"
+  loop:
+    - { property: '/desktop/interface/gtk-theme'                      , value: "'Yaru-dark'" } 
+    - { property: '/shell/extensions/dash-to-dock/show-apps-at-top'   , value: "true" } 
+    - { property: '/shell/extensions/dash-to-dock/dash-max-icon-size' , value: "25" } 
+    - { property: '/shell/extensions/dash-to-dock/dock-position'      , value: "'BOTTOM'" } 
+    - { property: '/shell/extensions/dash-to-dock/click-action'       , value: "'minimize'" } 
+    - { property: '/shell/favorite-apps', value: "['google-chrome.desktop', 'firefox.desktop', 'code.desktop']" } 
+
+
+    
+
 #########################################################################################
 # Files
 - name: AVATAR > Copy
