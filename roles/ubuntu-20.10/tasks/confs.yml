@@ -45,10 +45,12 @@
   become: true
   become_user: "{{current_user}}"
   dconf:
-    key: "/org/gnome/nautilus/preferences{{item.property}}"
+    key: "/org/gnome{{item.property}}"
     value: "{{item.value}}"
   loop:
-    - { property: '/always-use-location-entry'     , value: "true" } 
+    - { property: '/nautilus/preferences/always-use-location-entry' , value: "true"         } 
+    # - { property: '/desktop/default-applications/terminal/exec'     , value: "terminator"   } 
+    # - { property: '/desktop/default-applications/terminal/exec-arg' , value: "-x"           } 
 
 
 - name: THEME CONF {{current_user}}
