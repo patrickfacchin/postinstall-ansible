@@ -1,0 +1,123 @@
+- name: Add a setting to ~/.gitconfig
+  become: true
+  become_user: "{{current_user}}"
+  community.general.git_config:
+    name: "{{item.name}}"
+    scope: global
+    value: "{{item.value}}"
+  loop:
+    - { name: 'user.email'                  , value: '{{current_user}}@{{current_user}}' } 
+    - { name: 'user.name'                   , value: '{{current_user}}' } 
+    - { name: 'core.editor'                 , value: 'vim' } 
+    - { name: 'alias.tree'                  , value: "log --graph --all --decorate --source --name-only" }
+    - { name: 'alias.lg'                    , value: "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" } 
+    - { name: 'alias.ignore'                , value: '! git update-index --assume-unchanged' }
+    - { name: 'alias.unignore'              , value: '! git update-index --no-assume-unchanged' }
+    - { name: 'alias.ignored'               , value: '! git ls-files -v | grep ^[a-z]' }
+    - { name: 'alias.clone-branches'        , value: '! git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /remotes/p;" | xargs -L1 git checkout -t' }
+    - { name: 'alias.analises'              , value: '! git add . && git commit --allow-empty -m "Analises ..." && git push' }
+    - { name: 'alias.track-branch'          , value: '! git commit --allow-empty -m "Track Branch" && git push -u origin $(git symbolic-ref --short -q HEAD)' }
+    - { name: 'alias.cmd-merge-request'     , value: '! git commit --allow-empty -m "cmd: merge-request" && git push' }
+    - { name: 'alias.cmd-merge-request-fix' , value: '! git commit --allow-empty -m "cmd: merge-request-fix" && git push' }
+    - { name: 'alias.cmd-push-clear'        , value: '! git commit --allow-empty -m "cmd: push-clear" && git push' }
+    
+#########################################################################################
+# - name: CONFS ROOT
+#   lineinfile:
+#     path: "{{item.path}}"
+#     regexp: "{{item.regexp}}"
+#     line: "{{item.line}}"
+#   loop:
+#     - { path: '/etc/default/tor', regexp: 'RUN_DAEMON="yes"', line: 'RUN_DAEMON="no"' }
+
+########################################################################################
+- name: SHORTCUTS {{current_user}}
+  become: true
+  become_user: "{{current_user}}"
+  xfconf:
+    channel: xfce4-keyboard-shortcuts
+    property: "{{item.property}}"
+    value_type: string
+    value: "{{item.value}}"
+  loop:
+    - { property: '/commands/custom/<Super>e' , value: 'thunar' } 
+    - { property: '/commands/custom/<Super>l' , value: 'xflock4' } 
+    - { property: '/xfwm4/custom/<Super>d'    , value: 'show_desktop_key' } 
+
+
+- name: XFCONF GERAL {{current_user}}
+  become: true
+  become_user: "{{current_user}}"
+  xfconf:
+    channel: "{{item.channel}}"
+    property: "{{item.property}}"
+    value_type: "{{item.value_type}}"
+    value: "{{item.value}}"
+  loop:
+    - { channel: 'xsettings' , property: '/Net/IconThemeName' , value_type: 'string', value: 'breeze-dark' }
+    - { channel: 'xsettings' , property: '/Net/ThemeName'     , value_type: 'string', value: 'Greybird-dark' }
+    - { channel: 'xfwm4'     , property: '/general/theme'     , value_type: 'string', value: 'Numix' }
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI1/workspace0/image-style' , value_type: 'int', value: '0' } 
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS1/workspace0/image-style' , value_type: 'int', value: '0' }
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorHDMI-1/workspace0/image-style' , value_type: 'int', value: '0' } 
+    # - { channel: 'xfce4-desktop' , property: '/backdrop/screen0/monitorLVDS-1/workspace0/image-style' , value_type: 'int', value: '0' }
+    
+#########################################################################################
+# AVATAR
+- name: AVATAR > Copy
+  become: true
+  become_user: "{{current_user}}"
+  copy: src=roles/{{flavor}}/files/avatar.jpg dest=/home/{{current_user}}/.face owner={{current_user}} group={{current_user}} mode=600
+- name: AVATAR > Copy
+  copy: src=roles/{{flavor}}/files/avatar.jpg dest=/var/lib/AccountsService/icons/{{current_user}} owner={{current_user}} group={{current_user}} mode=600
+
+#########################################################################################
+# TERMINAL
+- name: TERMINAL > Confs
+  copy: src=roles/{{flavor}}/files/terminalrc dest=/home/{{current_user}}/.config/xfce4/terminal/ owner={{current_user}} group={{current_user}} mode=600
+#########################################################################################
+# VSCODE
+- name: VSCODE > Settings
+  become: true
+  become_user: "{{current_user}}"
+  copy: src=roles/{{flavor}}/files/settings.json dest=/home/{{current_user}}/.config/Code/User/settings.json
+#########################################################################################
+# ALIAS ZSH
+- name: youtube-dl > Add include 'alias'
+  lineinfile:
+    path: /home/{{current_user}}/.zshrc 
+    line: "{{item.source}}"
+    owner: "{{current_user}}"
+    regexp: "^{{item.source}}$"
+    state: present
+    insertafter: EOF
+    create: True
+  loop:
+    - { source: "source ~/.zsh_aliases" }
+    - { source: "source ~/.zsh_confs" }
+    
+- name: youtube-dl > Add alias 'do'
+  lineinfile:
+    path: /home/{{current_user}}/.zsh_aliases 
+    line: "alias do='youtube-dl -f best -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'"
+    owner: "{{current_user}}"
+    regexp: "^alias do='youtube-dl -f best -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'$"
+    state: present
+    insertafter: EOF
+    create: True
+
+- name: youtube-dl > Add alias 'dol'
+  lineinfile:
+    path: /home/{{current_user}}/.zsh_aliases 
+    line: "alias dol='youtube-dl -f worst -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'"
+    owner: "{{current_user}}"
+    regexp: "^alias dol='youtube-dl -f worst -ciw -o \"$HOME/Videos/%(title)s.%(ext)s\"'$"
+    state: present
+    insertafter: EOF
+    create: True
+
+- name: ZSH > Confs
+  become: true
+  become_user: "{{current_user}}"
+  copy: src=roles/{{flavor}}/files/.zsh_confs dest=/home/{{current_user}}/.zsh_confs owner={{current_user}} group={{current_user}} mode=600
+#########################################################################################

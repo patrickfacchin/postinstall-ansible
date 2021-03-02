@@ -1,0 +1,21 @@
+[global_config]
+  title_font = Sans Bold 9
+[keybindings]
+[profiles]
+  [[default]]
+    cursor_blink = False
+    cursor_color = "#aaaaaa"
+    cursor_color_fg = False
+    font = Monospace 10
+    show_titlebar = False
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+[plugins]

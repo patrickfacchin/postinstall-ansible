@@ -1,3 +1,18 @@
+#### XUBUNTU 20.10
+
+###### Requerimentos:
+
+``` sh
+sudo apt install -y ansible git && \
+ansible-galaxy collection install community.general:1.3.0
+```
+
+###### Executando o playbook LOCAL
+``` sh
+sudo ansible-playbook local.yml --extra-vars "current_user=<USER> flavor=xubuntu-20.10"
+```
+
+
 #### UBUNTU 20.10
 
 ###### Requerimentos:

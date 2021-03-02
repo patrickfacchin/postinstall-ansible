@@ -1,0 +1,48 @@
+- name: VCAM > Install required system packages
+  apt: name={{ item }} state=present
+  loop: 
+    - v4l2loopback-dkms # Source for the v4l2loopback driver (DKMS)
+    - qtbase5-dev # Qt 5 base development files
+    - cmake # cross-platform, open-source make system
+
+#########################################################################################
+- name: Check if v4l2loopback is installed.
+  stat:
+    path: /etc/modprobe.d/v4l2loopback.conf
+  register: v4l2loopback_conf
+#########################################################################################
+- git:
+    repo: 'https://github.com/obsproject/obs-studio.git'
+    dest: /srv/obs-studio
+  when: not v4l2loopback_conf.stat.exists
+
+- git:
+    repo: 'https://github.com/CatxFish/obs-v4l2sink.git'
+    dest: /srv/obs-v4l2sink
+  when: not v4l2loopback_conf.stat.exists
+
+#########################################################################################
+- name: VCAM > CREATE DIR
+  shell: mkdir -p /srv/obs-v4l2sink/build
+  when: not v4l2loopback_conf.stat.exists
+
+- name: VCAM > MAKE
+  shell: "{{item}}"
+  args:
+    chdir: /srv/obs-v4l2sink/build
+  when: not v4l2loopback_conf.stat.exists
+  with_items:
+    - 'cmake -DLIBOBS_INCLUDE_DIR="../../obs-studio/libobs" -DCMAKE_INSTALL_PREFIX=/usr ..'
+    - 'make -j4'
+    - 'make install > /srv/obs-v4l2sink.txt'
+#########################################################################################
+- name: VCAM > SETUP
+  shell: "{{item}}"
+  when: not v4l2loopback_conf.stat.exists
+  with_items:
+    # We need to set up the virtual camera device. I use /dev/video10 to not collide with any existing devices
+    # update-initramfs -c -k $(uname -r)
+    # lsmod | grep -i v4l2loopback
+    - echo "v4l2loopback" >> /etc/modules
+    - echo "options v4l2loopback devices=1 video_nr=10 card_label='OBS Cam' exclusive_caps=1" > /etc/modprobe.d/v4l2loopback.conf
+#########################################################################################    
